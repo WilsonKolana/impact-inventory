@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebAPI.DataAccess;
+using WebAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,12 +14,14 @@ builder.Services.AddControllers();
 //add the database config
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection"))
-
 );
+
+builder.Services.AddDefaultIdentity<ApplicationUser>()
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
 //register serives for Jwt Authentication 
 
-var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings"].ToString());
+var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"].ToString());
 
 builder.Services.AddAuthentication(options =>
 {
@@ -56,6 +59,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseAuthentication();
 
 app.MapControllers();
 
