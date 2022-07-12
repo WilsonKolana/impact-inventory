@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using WebAPI.DataAccess;
 using WebAPI.Models;
 using WebAPI.Models.Dto;
@@ -16,23 +21,25 @@ namespace WebAPI.Controllers
 
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        private readonly AppSettings _appSettings;
+
+        public AuthenticationController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<AppSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _appSettings = appSettings.Value;
         }
 
         [HttpPost("Register")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2200:Rethrow to preserve stack details", Justification = "<Pending>")]
         //Post: /api/Authentication/Register
-
         public async Task<Object> RegisterUser(RegsiterRequest model)
         {
             var user = new ApplicationUser()
             {
                 Email = model.Email,
                 Name = model.Name,
-                Surname = model.Surname
+                Surname = model.Surname,
+                UserName = "aaa"
             };
 
             try
@@ -46,6 +53,37 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPost("Login")]
+        //Post: /api/Authentication/Login
+        public async Task<Object> Login(LoginRequest model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim("USERID", user.Id.ToString())
+                    }),
+
+                    Expires = DateTime.UtcNow.AddMinutes(15),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.SigningKey)), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var SecurityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(SecurityToken);
+                return Ok(new { token });
+            }
+            else
+            {
+
+                return BadRequest(new { message = "Incorrect Email or Password." });
+            }
+            
+        }
 
     }
 }
