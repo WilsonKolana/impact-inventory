@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
+import { Toast, ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-registration',
@@ -8,7 +10,7 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(public service: UserService) { }
+  constructor(public service: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -17,12 +19,11 @@ export class RegistrationComponent implements OnInit {
     this.service.register().subscribe({
       complete: () => { 
         this.service.formModel.reset();
-        alert("user created, check the database");
-        // this.toastr.success('New user created!', 'Registration successful.');
+        this.toastr.success('New user created!', 'Registration successful.');
        }, // completeHandler
       error: (error) => {
-          alert(error)
-          console.log(error); 
+          console.log(error.description); 
+          this.toastr.error(error.description, 'Registration failed.');
         },    // errorHandler 
       next: () => {  },     // nextHandler
       
