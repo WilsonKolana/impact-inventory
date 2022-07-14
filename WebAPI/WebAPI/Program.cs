@@ -37,6 +37,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
+builder.Services.AddCors();
+
 //register services for Jwt Authentication 
 
 var key = Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:SigningKey"].ToString());
@@ -73,6 +75,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(builder =>
+builder.WithOrigins("http://localhost:4200")
+.AllowAnyHeader()
+.AllowAnyMethod()
+);
 
 app.UseHttpsRedirection();
 

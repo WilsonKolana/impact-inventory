@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
                 Email = model.Email,
                 Name = model.Name,
                 Surname = model.Surname,
-                UserName = "aaa"
+                UserName = model.UserName,
             };
 
             try
