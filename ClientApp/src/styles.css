@@ -1,10 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
 body{
-    background-color: hsl(69, 44%, 24%);;
+    background-color: #ffc107;;
 }
 
 input.form-control,input.form-control:focus{
-    background-color: hsla(220, 21%, 39%, 0.096);
+    background-color: #ffc107;
     color: black;
     border-color: black;
     border-radius: 0px;
