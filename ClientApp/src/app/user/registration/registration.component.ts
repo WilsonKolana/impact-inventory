@@ -15,48 +15,30 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    this.service.register().subscribe({
-      complete: () => { 
-        this.service.formModel.reset();
-        this.toastr.success('New user created!', 'Registration successful.');
-       }, // completeHandler
-      error: (error) => {
-          console.log(error.description); 
-          this.toastr.error(error.description, 'Registration failed.');
-        },    // errorHandler 
-      next: () => {  },     // nextHandler
-      
-  });
-  
+  //Need to use non-deprecated subscribe variant, Have not figured out how to access status code, description etc from it
+  onSubmit() {
+    this.service.register().subscribe(
+      (res: any) => {
+        if (res.succeeded) {
+          this.service.formModel.reset();
+          this.toastr.success('New user created!', 'Registration successful.');
+        } else {
+          res.errors.forEach((element: { code: any; description: string | undefined; }) => {
+            switch (element.code) {
+              case 'DuplicateUserName':
+                this.toastr.error('Username is already taken','Registration failed.');
+                break;
+
+              default:
+              this.toastr.error(element.description,'Registration failed.');
+                break;
+            }
+          });
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );  
   }
- 
-  // onSubmit() {
-  //   this.service.register().subscribe(
-      
-  //       (res: any) => {
-  //         if (res.succeeded) {
-           
-  //         } else {
-  //           res.errors.forEach((element: { code: any; }) => {
-  //             switch (element.code) {
-  //               case 'DuplicateUserName':
-  //                 // this.toastr.error('Username is already taken','Registration failed.');
-  //                 break;
-
-  //               default:
-  //               // this.toastr.error(element.description,'Registration failed.');
-  //                 break;
-  //             }
-  //           });
-  //         }
-  //         error:(error: any) => {
-           
-  //           }
-  //     }
-      
-  //   );
-  // }
-
-
 }
