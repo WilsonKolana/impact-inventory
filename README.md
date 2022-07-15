@@ -31,7 +31,7 @@ When running the app for the first time, or after adding new ef core models, mak
 **To Run**
    run: `dotnet run`
  
- ### Web API
+ ### Client APP
 
 **To Build**
 
