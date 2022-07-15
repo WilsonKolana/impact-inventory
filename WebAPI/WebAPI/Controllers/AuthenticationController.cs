@@ -68,7 +68,7 @@ namespace WebAPI.Controllers
                         new Claim("USERID", user.Id.ToString())
                     }),
 
-                    Expires = DateTime.UtcNow.AddMinutes(15),
+                    Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.SigningKey)), SecurityAlgorithms.HmacSha256Signature)
                 };
 
