@@ -20,7 +20,7 @@ Make sure you have the following tools installed in your machine before runing t
 
 ### Web API
 
-**To Build **
+**To Build**
 
 When running the app for the first time, or after adding new ef core models, make sure to apply migrations by running these:
  - `dotnet ef migrations add <migration name>`
@@ -29,11 +29,11 @@ When running the app for the first time, or after adding new ef core models, mak
 2. To build the project run: `dotnet  build`
 
 **To Run**
- run: `dotnet run`
+   run: `dotnet run`
  
  ### Web API
 
-**To Build **
+**To Build**
 
 1. Firstly, add the package dependencies by running: `npm install` in the project directory.
 2. To build the project run: `ng  build`
