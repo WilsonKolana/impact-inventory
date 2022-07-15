@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class UserService {
-
+  
   constructor(private fb: FormBuilder, private http: HttpClient) { }
   readonly BaseURI = 'https://localhost:7040/api';
   
@@ -30,5 +30,9 @@ export class UserService {
       Password: this.formModel.value.Passwords?.Password
     };
     return this.http.post(this.BaseURI + '/Authentication/Register', body);
+  }
+
+  login(formData: any) {
+    return this.http.post(this.BaseURI + '/Authentication/Login', formData);
   }
 }
