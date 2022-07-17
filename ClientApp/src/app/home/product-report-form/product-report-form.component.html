@@ -2,35 +2,32 @@
     <h1 class="display-4 text-center">Add Product</h1>
 </div>
 <form class="col-md-8 container" novalidate autocomplete="off" #form="ngForm" (submit)="{}">
-    <!-- <input type="hidden" name="paymentDetailId" [value]="service.formData.paymentDetailId" /> -->
+    <input type="hidden" name="productId" [value]="service.productFormData.productId" />
     <div class="form-group">
         <label>PRODUCT NAME</label>
-        <input class="form-control" formControlName="ProductName">
-            
+        <input type="text" class="form-control" name="productName" #productName="ngModel" [(ngModel)]="service.productFormData.productName">
     </div>
     <div class="form-group">
         <label>QUANTITY</label>
-        <input class="form-control" formControlName="Quantity">
-          
+        <input class="form-control" name="Quantity" [(ngModel)]="service.productFormData.quantity">
     </div>
     <div class="form-group">
         <label>MANUFATURING DATE</label>
-        <input type="date" class="form-control" formControlName="ManufacturingDate">
-            
+        <input type="date" class="form-control" name="ManufacturingDate" #manufacturingDate="ngModel" [(ngModel)]="service.productFormData.manufacturingDate">
     </div>
     <div class="form-group">
         <label>BATCH NO.</label>
-        <input class="form-control"  formControlName="BatchNumber">
+        <input class="form-control"  name="BatchNumber" #batchNumber="ngModel" [(ngModel)]="service.productFormData.batchNumber">
     </div>
     <div class="form-group">
         <label>SUPPLIER</label>
-        <input class="form-control"  formControlName="Suplier">
+        <input class="form-control"  name="Suplier" #supplier="ngModel" [(ngModel)]="service.productFormData.supplier">
     </div>
     <div class="form-group">
         <label>COST PRICE</label>
-        <input class="form-control"  formControlName="CostPrice">
+        <input class="form-control"  name="CostPrice" #costPrice="ngModel" [(ngModel)]="service.productFormData.costPrice">
     </div>
     <div class="form-group">
-        <button class="btn btn-info btn-lg btn-block" type="submit">SUBMIT</button>
+        <button class="btn btn-info btn-lg btn-block" type="submit">Add Product</button>
     </div>
 </form>
