@@ -1,0 +1,36 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Add Product</h1>
+</div>
+<form class="col-md-8 container" novalidate autocomplete="off" #form="ngForm" (submit)="{}">
+    <!-- <input type="hidden" name="paymentDetailId" [value]="service.formData.paymentDetailId" /> -->
+    <div class="form-group">
+        <label>PRODUCT NAME</label>
+        <input class="form-control" formControlName="ProductName">
+            
+    </div>
+    <div class="form-group">
+        <label>QUANTITY</label>
+        <input class="form-control" formControlName="Quantity">
+          
+    </div>
+    <div class="form-group">
+        <label>MANUFATURING DATE</label>
+        <input type="date" class="form-control" formControlName="ManufacturingDate">
+            
+    </div>
+    <div class="form-group">
+        <label>BATCH NO.</label>
+        <input class="form-control"  formControlName="BatchNumber">
+    </div>
+    <div class="form-group">
+        <label>SUPPLIER</label>
+        <input class="form-control"  formControlName="Suplier">
+    </div>
+    <div class="form-group">
+        <label>COST PRICE</label>
+        <input class="form-control"  formControlName="CostPrice">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit">SUBMIT</button>
+    </div>
+</form>

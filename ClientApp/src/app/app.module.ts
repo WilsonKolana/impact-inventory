@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './shared/user.service';
 import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
+import { ProductReportComponent } from './home/product-report/product-report.component';
+import { ProductReportFormComponent } from './home/product-report-form/product-report-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HomeComponent } from './home/home.component';
     UserComponent,
     RegistrationComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ProductReportComponent,
+    ProductReportFormComponent
   ],
   imports: [
     BrowserModule,

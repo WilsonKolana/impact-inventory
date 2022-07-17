@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    //need find a way to use non-depracated subscribe variant
     this.service.login(form.value).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
