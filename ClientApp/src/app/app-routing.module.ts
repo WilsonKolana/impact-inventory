@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:'home',component:HomeComponent,
    children: [
     {path: 'product-report', component:ProductReportComponent},
-    {path:'product-report-form', component: ProductReportFormComponent}
+    {path:'add-product', component: ProductReportFormComponent}
    ]
 
   }

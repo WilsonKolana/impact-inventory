@@ -20,16 +20,16 @@ export class LoginComponent implements OnInit {
   constructor(private service: UserService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('token') != null)
-    this.router.navigateByUrl('/home');
+    if (sessionStorage.getItem('token') != null)
+      this.router.navigateByUrl('/home/product-report');
   }
 
   onSubmit(form: NgForm) {
     //need find a way to use non-depracated subscribe variant
     this.service.login(form.value).subscribe(
       (res: any) => {
-        localStorage.setItem('token', res.token);
-        this.router.navigateByUrl('/home');
+        sessionStorage.setItem('token', res.token);
+        this.router.navigateByUrl('/home/product-report');
       },
       (err: any) => {
         if (err.status == 400)

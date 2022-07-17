@@ -1,1 +1,29 @@
-<p>product-report works!</p>
+
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Products In Your Inventory</h1>
+</div><div>
+    <button class="btn btn-success btn-lg btn-block" type="submit" routerLink="/home/add-product">Add New Product</button>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Manufacturing Date</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Batch No.</th>
+        <th scope="col">Supplier</th>
+        <th scope="col">Cost Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of AllProducts">
+        <th scope="row">{{ item.productName }}</th>
+        <td>{{ item.manufacturingDate }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.batchNumber }}</td>
+        <td>{{ item.supplier }}</td>
+        <td>{{ item.costPrice }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

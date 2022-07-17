@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UserService {
   
   constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURI = 'https://localhost:7040/api';
+  readonly BaseURI = 'https://localhost:7040/api/Authentication';
   
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -29,10 +29,10 @@ export class UserService {
       Email: this.formModel.value.Email,
       Password: this.formModel.value.Passwords?.Password
     };
-    return this.http.post(this.BaseURI + '/Authentication/Register', body);
+    return this.http.post(this.BaseURI + '/Register', body);
   }
 
   login(formData: any) {
-    return this.http.post(this.BaseURI + '/Authentication/Login', formData);
+    return this.http.post(this.BaseURI + '/Login', formData);
   }
 }

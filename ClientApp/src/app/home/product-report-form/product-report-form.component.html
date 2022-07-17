@@ -1,7 +1,7 @@
 <div class="jumbotron py-3">
     <h1 class="display-4 text-center">Add Product</h1>
 </div>
-<form class="col-md-8 container" novalidate autocomplete="off" #form="ngForm" (submit)="{}">
+<form class="col-md-8 container" novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
     <input type="hidden" name="productId" [value]="service.productFormData.productId" />
     <div class="form-group">
         <label>PRODUCT NAME</label>
